@@ -12,3 +12,4 @@ pytz==2025.2
 six==1.17.0
 SQLAlchemy==1.4.50
 Werkzeug==2.0.3
+python-dotenv==1.0.1

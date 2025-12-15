@@ -1,12 +1,26 @@
 import os
 from sqlalchemy import Column, String, Integer, create_engine
 from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
 import json
 
-database_name = "trivia"
+load_dotenv()
+
+# Default DB settings pulled from environment
+DB_NAME = os.getenv("DB_NAME", "trivia")
+DB_USER = os.getenv("DB_USER", "postgres")
+DB_PASSWORD = os.getenv("DB_PASSWORD", "")
+DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_PORT = os.getenv("DB_PORT", "5432")
+
+if DB_PASSWORD:
+    credentials = f"{DB_USER}:{DB_PASSWORD}@"
+else:
+    credentials = f"{DB_USER}@"
+
 database_path = os.getenv(
     "DATABASE_URL",
-    "postgresql://postgres@localhost:5432/{}".format(database_name)
+    f"postgresql://{credentials}{DB_HOST}:{DB_PORT}/{DB_NAME}"
 )
 
 db = SQLAlchemy()

@@ -12,23 +12,33 @@ source .venv/bin/activate
 ```
 pip install -r requirements.txt
 ```
-3) Databases (default URIs):
-- Dev: `postgresql://postgres:o@localhost:5432/trivia`
-- Test: `postgresql://postgres:o@localhost:5432/trivia_test`
+3) Environment variables (examples):
+```
+DB_NAME=trivia
+DB_USER=postgres
+DB_PASSWORD=your_password   # can be blank if using peer auth
+DB_HOST=localhost
+DB_PORT=5432
+DATABASE_URL=postgresql://postgres:your_password@localhost:5432/trivia   # optional override
+TEST_DB_NAME=trivia_test
+```
+4) Databases (default URIs if above not set):
+- Dev: `postgresql://postgres@localhost:5432/trivia`
+- Test: `postgresql://postgres@localhost:5432/trivia_test`
 Create DBs and load sample data:
 ```
 createdb trivia
 psql trivia < trivia.psql
 createdb trivia_test
 ```
-4) Run the server:
+5) Run the server:
 ```
 export FLASK_APP=flaskr
 export FLASK_ENV=development
 export DATABASE_URL=postgresql://postgres:o@localhost:5432/trivia
 flask run
 ```
-5) Tests:
+6) Tests:
 ```
 export DATABASE_URL=postgresql://postgres:o@localhost:5432/trivia_test
 python test_flaskr.py
